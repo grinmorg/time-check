@@ -1,4 +1,4 @@
-import { PAGE_TIMELINE } from "./constants";
+import { PAGE_TIMELINES } from "./constants";
 import { isPageValid } from "./validators";
 
 export function normalizePageHash() {
@@ -8,7 +8,7 @@ export function normalizePageHash() {
     return page;
   }
 
-  window.location.hash = PAGE_TIMELINE;
+  window.location.hash = PAGE_TIMELINES;
 
-  return PAGE_TIMELINE;
+  return PAGE_TIMELINES;
 }
