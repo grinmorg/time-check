@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { CheckCircleIcon } from '@heroicons/vue/24/solid'
-import { PAGE_ARCHIVE } from '../constants'
+import { PAGE_TIMELINES } from '../constants'
 </script>
 
 <template>
-  <a :href="`#${PAGE_ARCHIVE}`" class="text-sm">
+  <a :href="`#${PAGE_TIMELINES}`" class="text-sm">
     <div v-if="false" class="flex items-center gap-1">
       All clear!
       <CheckCircleIcon class="h-7 text-green-500" />

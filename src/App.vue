@@ -15,9 +15,9 @@ function goTo(page: string) {
 </script>
 
 <template>
-  <TheHeader @navigate="goTo($event)" />
+  <TheHeader @navigate="goTo" />
 
-  <main class="flex-grow flex flex-col">
+  <main class="flex-grow flex flex-col container mx-auto mt-4">
     <TheTimelines v-show="currentPage === PAGE_TIMELINES" />
     <TheArchive v-show="currentPage === PAGE_ARCHIVE" />
   </main>
