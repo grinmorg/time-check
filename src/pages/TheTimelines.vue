@@ -35,7 +35,7 @@ const addNewTimeline = () => {
     id: generateUniqueId(),
     name: "Новый",
     time: "00:00:00",
-    ready: true,
+    ready: false,
   });
 };
 </script>
