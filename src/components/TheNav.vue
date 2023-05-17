@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import NavItem from "./NavItem.vue";
-import { NAV_ITEMS } from "../constants";
+import { NAV_ITEMS, PAGE_ARCHIVE, PAGE_TIMELINES } from "../constants";
 
 defineProps({
-  currentPage: String,
+  currentPage: {
+    required: true,
+    type: String,
+  },
 });
 
 const emit = defineEmits(["navigate"]);
@@ -19,7 +22,10 @@ const emit = defineEmits(["navigate"]);
         :class="{ 'bg-gray-200 pointer-events-none': currentPage === page }"
         @click="emit('navigate', page)"
       >
-        <component :is="icon" class="h-6 w-6" /> {{ page }}
+        <component :is="icon" class="h-6 w-6" />
+
+        <span v-if="page === PAGE_TIMELINES"> Время </span>
+        <span v-if="page === PAGE_ARCHIVE">История</span>
       </NavItem>
     </ul>
   </nav>

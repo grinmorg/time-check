@@ -1,8 +1,5 @@
-<script setup lang='ts'>
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
-    <h1>Archive</h1>
-    
+  <h1>История</h1>
 </template>
