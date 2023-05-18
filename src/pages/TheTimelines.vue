@@ -1,43 +1,26 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import TimelineItem from "../components/TimelineItem.vue";
 import Button from "../components/Button.vue";
 import { generateUniqueId } from "../functions";
+import { useTimelinesStore } from "../stores/timelines";
+import { onMounted } from "vue";
 
-interface ITimelinesItem {
-  id: string | number;
-  name: string;
-  time: string;
-  ready: boolean;
-}
-
-const timelinesItems = ref<ITimelinesItem[]>([
-  {
-    id: 1,
-    name: "Работа",
-    time: "00:00:00",
-    ready: false,
-  },
-  {
-    id: "2",
-    name: "Работа 2",
-    time: "00:01:20",
-    ready: true,
-  },
-]);
-
-const removeTimeline = (id: number) => {
-  timelinesItems.value = timelinesItems.value.filter((item) => item.id !== id);
-};
+const storeTimelines = useTimelinesStore();
 
 const addNewTimeline = () => {
-  timelinesItems.value.push({
+  storeTimelines.addItem({
     id: generateUniqueId(),
-    name: "Новый",
+    name: "Название",
+    hasTime: false,
     time: "00:00:00",
     ready: false,
   });
 };
+
+onMounted(() => {
+  // load items from local storage
+  storeTimelines.loadItems();
+});
 </script>
 
 <template>
@@ -45,10 +28,10 @@ const addNewTimeline = () => {
     <h1 class="text-3xl text-center font-medium">Список</h1>
     <ul>
       <TimelineItem
-        v-for="item in timelinesItems"
+        v-for="item in storeTimelines.items"
         :key="item.id"
         :item="item"
-        @delete="removeTimeline"
+        @delete="storeTimelines.removeItem(item.id)"
       />
     </ul>
 

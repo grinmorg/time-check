@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@heroicons/vue": "^2.0.18",
+    "pinia": "^2.1.2",
     "vue": "^3.2.47"
   },
   "devDependencies": {
+    "@types/vue": "^2.0.0",
     "@vitejs/plugin-vue": "^4.1.0",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.22",

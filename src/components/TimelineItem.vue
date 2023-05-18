@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import { ITimelinesItem } from "../@types/interfaces";
+import { useTimelinesStore } from "../stores/timelines";
 import StopwatchTime from "./StopwatchTime.vue";
+
+const storeTimelines = useTimelinesStore();
 
 const props = defineProps({
   item: {
@@ -9,6 +13,16 @@ const props = defineProps({
 });
 
 const emit = defineEmits(["delete"]);
+
+const updateHasTime = (value: boolean) => {
+  const updatedItem = { ...props.item, hasTime: value };
+  storeTimelines.updateItemFields(updatedItem as ITimelinesItem);
+};
+
+const updateTime = (value: string) => {
+  const updatedItem = { ...props.item, time: value };
+  storeTimelines.updateItemFields(updatedItem as ITimelinesItem);
+};
 </script>
 
 <template>
@@ -49,12 +63,19 @@ const emit = defineEmits(["delete"]);
           />
         </svg>
       </div>
-      <div :class="{ 'text-slate-500 line-through': props.item.ready }">
-        {{ props.item.name }}
-      </div>
+      <input
+        type="text"
+        :value="props.item.name"
+        :class="{ 'bg-green-200': props.item.ready }"
+      />
     </div>
 
-    <StopwatchTime :start-time="props.item.time" />
+    <StopwatchTime
+      :start-time="props.item.time"
+      :has-time="props.item.hasTime"
+      @update-has-time="updateHasTime"
+      @update-time="updateTime"
+    />
 
     <button @click="emit('delete', props.item.id)">
       <svg

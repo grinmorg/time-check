@@ -6,12 +6,39 @@ import TheNav from "./components/TheNav.vue";
 import TheArchive from "./pages/TheArchive.vue";
 import TheTimelines from "./pages/TheTimelines.vue";
 import { PAGE_ARCHIVE, PAGE_TIMELINES } from "./constants";
+import { useTimelinesStore } from "./stores/timelines";
+// import { computed } from "vue";
+// import { onMounted } from "vue";
+// import { watch } from "vue";
+
+// const storeTimelines = useTimelinesStore();
 
 const currentPage = ref(normalizePageHash());
 
 function goTo(page: string) {
   currentPage.value = page;
 }
+
+// const pageTitle = computed(() => {
+//   const lastUpdateItem = storeTimelines.getLastUpdateTimelineItem;
+
+//   if (lastUpdateItem) {
+//     return `TimeCheck ${lastUpdateItem.time}`; // Update this based on your item's property
+//   } else {
+//     return "TimeCheck";
+//   }
+// });
+
+// onMounted(() => {
+//   if (pageTitle.value) {
+//     document.title = pageTitle.value; // Set the initial page title
+//   }
+// });
+
+// // Update the page title whenever the getter value changes
+// watch(pageTitle, (newValue) => {
+//   document.title = newValue;
+// });
 </script>
 
 <template>
