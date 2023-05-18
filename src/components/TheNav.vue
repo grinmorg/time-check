@@ -6,6 +6,10 @@ defineProps({
   currentPage: {
     required: true,
     type: String,
+    validator(currentPage: string) {
+      // Проверяет есть ли такая страница в списке страниц
+      return Object.keys(NAV_ITEMS).includes(currentPage);
+    },
   },
 });
 
