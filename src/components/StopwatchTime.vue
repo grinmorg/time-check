@@ -5,7 +5,6 @@ import {
   XCircleIcon,
 } from "@heroicons/vue/24/outline";
 import { ref, computed, onMounted } from "vue";
-import Checkbox from "./Checkbox.vue";
 import { watch } from "vue";
 
 const props = defineProps({
@@ -13,15 +12,10 @@ const props = defineProps({
     default: "00:00:00",
     type: String,
   },
-  hasTime: {
-    default: false,
-    type: Boolean,
-  },
 });
 
 const emit = defineEmits(["update-time", "update-has-time"]);
 
-const showItem = ref(props.hasTime);
 const isRunning = ref(false);
 const startTime = ref(0);
 const elapsedTime = ref(0);
@@ -55,7 +49,7 @@ const stop = () => {
 
 const reset = () => {
   elapsedTime.value = 0;
-  changeVisibleTime(false);
+  emit("update-has-time", false);
 };
 
 const updateTime = () => {
@@ -71,11 +65,6 @@ const toggleTime = () => {
   } else {
     stop();
   }
-};
-
-const changeVisibleTime = (state: boolean) => {
-  showItem.value = state;
-  emit("update-has-time", showItem.value);
 };
 
 onMounted(() => {
@@ -97,10 +86,10 @@ watch(elapsedTime, (newValue) => {
 </script>
 
 <template>
-  <div class="flex items-center">
-    <Checkbox v-if="!showItem" @change="changeVisibleTime" label="На время?" />
+  <div class="flex items-center min-w-[160px]">
+    
 
-    <div v-else class="flex gap-2 pt-1">
+    <div class="flex gap-2 pt-1">
       <div class="font-medium cursor-pointer" @click="toggleTime">
         {{ formatTime }}
       </div>
@@ -108,19 +97,19 @@ watch(elapsedTime, (newValue) => {
         <button @click="start" :disabled="isRunning">
           <PlayCircleIcon
             class="w-6 h-6"
-            :class="{ 'cursor-not-allowed': isRunning }"
+            :class="{ 'cursor-not-allowed opacity-40': isRunning }"
           />
         </button>
         <button @click="stop" :disabled="!isRunning">
           <PauseCircleIcon
             class="w-6 h-6"
-            :class="{ 'cursor-not-allowed': !isRunning }"
+            :class="{ 'cursor-not-allowed opacity-40': !isRunning }"
           />
         </button>
         <button @click="reset" :disabled="isRunning">
           <XCircleIcon
             class="w-6 h-6"
-            :class="{ 'cursor-not-allowed': isRunning }"
+            :class="{ 'cursor-not-allowed opacity-40': isRunning }"
           />
         </button>
       </div>

@@ -18,3 +18,7 @@ export function generateUniqueId() {
 
   return randomNumber;
 }
+
+export function getRandomNumber() {
+  return Math.random().toString(36).substring(2, 15);
+}

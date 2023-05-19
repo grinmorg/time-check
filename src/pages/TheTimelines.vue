@@ -26,7 +26,7 @@ onMounted(() => {
 <template>
   <div>
     <h1 class="text-3xl text-center font-medium">Список</h1>
-    <ul>
+    <ul class="max-w-xl mx-auto">
       <TimelineItem
         v-for="item in storeTimelines.items"
         :key="item.id"
