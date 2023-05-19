@@ -2,8 +2,8 @@
 import { ITimelinesItem } from "../@types/interfaces";
 import { useTimelinesStore } from "../stores/timelines";
 import StopwatchTime from "./StopwatchTime.vue";
-import InputCustom from "./InputCustom.vue";
-import CheckboxCustom from "./CheckboxCustom.vue";
+import BaseInput from "./BaseInput.vue";
+import BaseCheckbox from "./BaseCheckbox.vue";
 
 const storeTimelines = useTimelinesStore();
 
@@ -84,7 +84,7 @@ const updateItem = (type: string, value: boolean | string) => {
 
     <div class="w-full">
       <div class="flex justify-between items-center gap-2">
-        <InputCustom
+        <BaseInput
           type="text"
           placeholder="Название"
           :value="props.item.name"
@@ -111,14 +111,13 @@ const updateItem = (type: string, value: boolean | string) => {
       </div>
 
       <div class="flex justify-between items-center mt-2 gap-2">
-        <CheckboxCustom
+        <BaseCheckbox
           :checked="props.item.hasTime"
           @change="updateItem('has-time', $event)"
           label="На время?"
         />
-
         <div v-if="props.item.hasTime" class="flex-1 flex">
-          <InputCustom
+          <BaseInput
             placeholder="Ставка в час"
             :class="{ 'bg-green-200': props.item.ready }"
           />

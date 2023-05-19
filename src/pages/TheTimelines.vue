@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import TimelineItem from "../components/TimelineItem.vue";
-import Button from "../components/Button.vue";
+import BaseButton from "../components/BaseButton.vue";
 import { generateUniqueId } from "../functions";
 import { useTimelinesStore } from "../stores/timelines";
 import { onMounted } from "vue";
@@ -36,7 +36,7 @@ onMounted(() => {
     </ul>
 
     <div class="flex justify-center mt-4">
-      <Button text="Добавить" @click="addNewTimeline" />
+      <BaseButton text="Добавить" @click="addNewTimeline" />
     </div>
   </div>
 </template>

@@ -17,16 +17,12 @@ export default {
   setup(props, { emit }) {
     const checkboxId = `checkbox-${getRandomNumber()}`;
 
-    const isChecked = ref(props.checked);
-
     function handleChange(event: Event) {
       const isCheckedValue = (event.target as HTMLInputElement).checked;
-      isChecked.value = isCheckedValue;
       emit("change", isCheckedValue);
     }
 
     return {
-      isChecked,
       handleChange,
       checkboxId,
     };
@@ -40,10 +36,11 @@ export default {
       v-bind="$attrs"
       :id="checkboxId"
       type="checkbox"
-      v-model="isChecked"
+      :checked="checked"
       @change="handleChange"
       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
     />
+
     <label
       v-if="label"
       :for="checkboxId"
