@@ -1,6 +1,22 @@
 <script setup lang="ts">
-import { CheckCircleIcon } from '@heroicons/vue/24/solid'
-import { PAGE_TIMELINES } from '../constants'
+import { CheckCircleIcon } from "@heroicons/vue/24/solid";
+import { PAGE_TIMELINES } from "../constants";
+import { useTimelinesStore } from "../stores/timelines";
+import { computed } from "vue";
+
+const storeTimelines = useTimelinesStore();
+
+const allItemsLength = computed(() => {
+  const allItems = storeTimelines.items;
+
+  return allItems?.length;
+});
+
+const readyItemsLength = computed(() => {
+  const readyItems = storeTimelines.getReadyItems;
+
+  return readyItems?.length;
+});
 </script>
 
 <template>
@@ -10,8 +26,14 @@ import { PAGE_TIMELINES } from '../constants'
       <CheckCircleIcon class="h-7 text-green-500" />
     </div>
     <div v-else class="flex items-center gap-1">
-      <div>Всего: <span class="font-mono">7/11</span></div>
-      <div class="h-3 w-3 rounded-full bg-red-500"></div>
+      <div>
+        Готово:
+        <span class="font-mono"
+          >{{ readyItemsLength }}/{{ allItemsLength }}</span
+        >
+      </div>
+      <div v-if="readyItemsLength === allItemsLength" class="h-3 w-3 rounded-full bg-green-500"></div>
+      <div v-else class="h-3 w-3 rounded-full bg-orange-500"></div>
     </div>
   </a>
 </template>

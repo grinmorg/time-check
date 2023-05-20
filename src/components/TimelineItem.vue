@@ -4,6 +4,8 @@ import { useTimelinesStore } from "../stores/timelines";
 import StopwatchTime from "./StopwatchTime.vue";
 import BaseInput from "./BaseInput.vue";
 import BaseCheckbox from "./BaseCheckbox.vue";
+import MoneyForTime from "./MoneyForTime.vue";
+import { ref } from "vue";
 
 const storeTimelines = useTimelinesStore();
 
@@ -42,6 +44,8 @@ const updateItem = (type: string, value: boolean | string) => {
       break;
   }
 };
+
+const priceForHour = ref(1500);
 </script>
 
 <template>
@@ -116,11 +120,17 @@ const updateItem = (type: string, value: boolean | string) => {
           @change="updateItem('has-time', $event)"
           label="На время?"
         />
-        <div v-if="props.item.hasTime" class="flex-1 flex">
-          <BaseInput
-            placeholder="Ставка в час"
-            :class="{ 'bg-green-200': props.item.ready }"
-          />
+        <div v-if="props.item.hasTime" class="flex-1 flex relative">
+          <div class="relative">
+            <BaseInput
+              placeholder="Ставка в час"
+              :value="priceForHour"
+              @change="priceForHour = $event"
+              :class="{ 'bg-green-200': props.item.ready }"
+              class="z-10 relative bg-transparent "
+            />
+            <p class="absolute bottom-0 right-0 bg-blue-500 p-1 rounded rounded-br-xl font-medium text-white text-sm z-0 ">Руб / час</p>
+          </div>
 
           <StopwatchTime
             class="ml-4"
@@ -129,6 +139,8 @@ const updateItem = (type: string, value: boolean | string) => {
             @update-has-time="updateItem('has-time', $event)"
             @update-time="updateItem('time', $event)"
           />
+
+          <MoneyForTime :time="props.item.time" :price-for-hour="priceForHour" class=" absolute -bottom-2 right-0 text-sm text-gray-500 " />
         </div>
       </div>
     </div>

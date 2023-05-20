@@ -12,7 +12,7 @@ export default {
       type: String,
     },
     value: {
-      type: String,
+      type: [String, Number],
     },
   },
   setup(prop, { emit }) {

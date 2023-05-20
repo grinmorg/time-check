@@ -1,12 +1,12 @@
 import { ArchiveBoxIcon, ClockIcon } from "@heroicons/vue/24/outline";
 
-export const BUTTON_TYPE_PRIMARY = "primary";
-export const BUTTON_TYPE_NEUTRAL = "neutral";
+export const BUTTON_TYPE_ACCESS = "access";
+export const BUTTON_TYPE_DEFAULT = "default";
 export const BUTTON_TYPE_DANGER = "danger";
 
 export const BUTTON_TYPES = [
-  BUTTON_TYPE_PRIMARY,
-  BUTTON_TYPE_NEUTRAL,
+  BUTTON_TYPE_ACCESS,
+  BUTTON_TYPE_DEFAULT,
   BUTTON_TYPE_DANGER,
 ];
 

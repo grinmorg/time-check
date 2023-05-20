@@ -4,6 +4,7 @@ import BaseButton from "../components/BaseButton.vue";
 import { generateUniqueId } from "../functions";
 import { useTimelinesStore } from "../stores/timelines";
 import { onMounted } from "vue";
+import { BUTTON_TYPE_ACCESS, BUTTON_TYPE_DANGER } from "../constants";
 
 const storeTimelines = useTimelinesStore();
 
@@ -36,7 +37,11 @@ onMounted(() => {
     </ul>
 
     <div class="flex justify-center mt-4">
-      <BaseButton text="Добавить" @click="addNewTimeline" />
+      <BaseButton
+        text="Добавить"
+        :type="BUTTON_TYPE_ACCESS"
+        @click="addNewTimeline"
+      />
     </div>
   </div>
 </template>

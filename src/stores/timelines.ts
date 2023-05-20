@@ -17,6 +17,12 @@ export const useTimelinesStore = defineStore("timelines", {
         return existingItem;
       }
     },
+    getReadyItems(): ITimelinesItem[] | undefined {
+      const existingItems = this.items.filter((item) => item.ready === true);
+      if (existingItems) {
+        return existingItems;
+      }
+    },
   },
 
   actions: {
